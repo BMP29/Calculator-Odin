@@ -8,7 +8,7 @@ const backSpace = document.getElementById('backSpace');
 let isFirst = true;
 
 let num1, num2, op;
-num1 = num2 = result = 0;
+num1 = num2 = result = null;
 
 //display the number in the Main Display and store the value in a variable
 keys.forEach((key) => {
@@ -22,12 +22,7 @@ keys.forEach((key) => {
 });
 
 //clear the display and reset the variables that make up the expression
-clear.addEventListener('click', () => {
-    num1 = num2 = result = ';'
-    isFirst = true;
-    displayMain.textContent = '';
-    displaySecondary.textContent = '';
-});
+clear.addEventListener('click', clearVars);
 
 //delete the last caracter of the number being displayed in the Main Display
 backSpace.addEventListener('click', () => {
@@ -35,11 +30,18 @@ backSpace.addEventListener('click', () => {
     storeNumbers();
 });
 
+function clearVars() {
+    num1 = num2 = result = op = null;
+    isFirst = true;
+    displayMain.textContent = '';
+    displaySecondary.textContent = '';
+}
+
 //store the number typed by the user on num1 or num2, depending on
 //wheter this is the 1# or 2# num of the operation
 function storeNumbers() {
-    if(isFirst) num1 = displayMain.textContent;
-    else num2 = displayMain.textContent;
+    if(isFirst) num1 = +(displayMain.textContent);
+    else num2 = +(displayMain.textContent);
 }
 
 //controls how the expression will be displayed in both displays 
@@ -49,23 +51,38 @@ opKey.forEach((key) => {
         displayMain.textContent = '';
         let tempOp;
 
+        console.log("num1 " + num1 + " num2 " + num2);
+
         if(isFirstNumber() != true) {
+            if(num2 == 0 && op == '/') {
+                alert("You can't divide by 0");
+                clearVars();
+                return;
+            }
             tempOp = op;
-            operate(num1, num2, op);  
-            console.log("operator: " + op);
+            operate(num1, num2, op);
+            result = +result.toFixed(2);
+            displayMain.textContent = result;
             op = key.value;
         }else op = key.value;
-
-        console.log(op);
         
-        if(key.value != '=') displaySecondary.textContent = `${num1} ${key.value} `;
-        else {
+        if(op == '=' && num1 != undefined && num2 != undefined) {
             displaySecondary.textContent = `${num1} ${tempOp} ${num2}`;
+            isFirstNumber();
             num1 = result;
+            num2 = undefined;
+        }
+        else if(op != '='){
+            if(result != null) {
+                num2 = num1 = result;
+                isFirstNumber();
+            }
+            displaySecondary.textContent = `${num1} ${op} `;
+        }else {
+            clearVars();
         }
     });
 });
-
 
 //return if the number is the first
 function isFirstNumber() {
@@ -97,28 +114,19 @@ function operate(a, b, operator) {
     console.log("num1: " + a + " num2: " + b + "operator: " + operator);
 }
 
-
 //operations
 function add(a, b) {
     result = (+a) + (+b);
-    result = result.toFixed(2);
-    displayMain.textContent = result;
 }
 
 function subtract(a, b) {
     result = (+a) - (+b);
-    result = result.toFixed(2);
-    displayMain.textContent = result;
 }
 
 function multiply(a, b) {
     result = (+a) * (+b);
-    result = result.toFixed(2);
-    displayMain.textContent = result;
 }
 
 function divide(a, b) {
     result = (+a) / (+b);
-    result = result.toFixed(2);
-    displayMain.textContent = result;
 }

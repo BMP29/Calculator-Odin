@@ -5,51 +5,86 @@ body {
 }
 
 #content {
-    background-color: #ff5656;
-    width: 200px;
+    background-color: #1d1d1d;
+    width: 350px;
     height: auto;
-    margin: 170px auto;
+    margin: 10px auto;
     padding: 20px;
     border: 2px solid black;
-    border-radius: 5px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
 }
 
-.key, .opKey, .opEqual {
-    width: 50px;
-    height: 50px;
-    font-size: 25px;
+.key, .opKey, #clear, #backSpace {
     box-sizing: border-box;
+    width: 80px;
+    height: 80px;
+    font-size: 35px;
+    box-sizing: border-box;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 2px solid rgb(66, 66, 66);
+}
+
+.key:hover, #clear:hover, #backSpace:hover {
+    border-color: rgb(18, 212, 0);
+}
+
+.opKey:hover {
+    border-color: white;
+}
+
+
+#clear, #backSpace {
+    width: 160px;
+    margin-top: 20px;
+}
+
+
+.opKey {
+    background-color: rgb(15, 15, 15);
+    color: white;
 }
 
 #buttonsKeyboard {
+    margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
+    gap: 10px;
 }
 
 #display {
-    height: 50px;
+    height: 100px;
     width: auto;
-    background-color: #858585;
+    background-color: #131313;
     display: flex;
     flex-direction: column;
     flex: 1;
     margin-bottom: 20px;
+    font-weight: bolder;
+    border-radius: 10px;
+    color: rgb(0, 75, 0);
+    font-family: "Calculator", Arial, Helvetica, sans-serif;
 }
 
 #displaySecondary {
+    padding-left: 5px;
+    padding-top: 5px;
     overflow-wrap: break-word;
-    font-size: 11px;
-    min-height: 15px;
+    font-size: 15px;
+    min-height: 25px;
 }
 
 #displayMain {
     overflow-wrap: break-word;
-    min-height: 30px;
-    font-size: 20px;
+    min-height: 60px;
+    font-size: 40px;
+    
+    padding-left: 2px;
 }
 
-.specialButtons > .key {
-    width: 100px;
+.specialButtons {
+    display: flex;
+    justify-content: space-between;
 }
