@@ -1,0 +1,55 @@
+body {
+    margin: 0;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    height: 100%;
+}
+
+#content {
+    background-color: #ff5656;
+    width: 200px;
+    height: auto;
+    margin: 170px auto;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.key, .opKey, .opEqual {
+    width: 50px;
+    height: 50px;
+    font-size: 25px;
+    box-sizing: border-box;
+}
+
+#buttonsKeyboard {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#display {
+    height: 50px;
+    width: auto;
+    background-color: #858585;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-bottom: 20px;
+}
+
+#displaySecondary {
+    overflow-wrap: break-word;
+    font-size: 11px;
+    min-height: 15px;
+}
+
+#displayMain {
+    overflow-wrap: break-word;
+    min-height: 30px;
+    font-size: 20px;
+}
+
+.specialButtons > .key {
+    width: 100px;
+}
